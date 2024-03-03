@@ -21,7 +21,7 @@ fun FavouriteList(controller: NavHostController,viewModel: AnimalFactsVM) {
             LazyColumn(Modifier.fillMaxWidth()) {
                 items(state.second) { fact ->
                     if(fact.isFavorite) {
-                        ListItem(fact,Modifier.fillMaxWidth())
+                        ListItem(fact,{ viewModel.updateData(it) },Modifier.fillMaxWidth())
                         Spacer(Modifier.height(16.dp))
                     }
                 }

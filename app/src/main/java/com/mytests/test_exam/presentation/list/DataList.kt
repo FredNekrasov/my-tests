@@ -39,18 +39,16 @@ fun DataList(controller: NavHostController,viewModel: AnimalFactsVM) {
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 colors = OutlinedTextFieldDefaults.colors()
             )
-            Spacer(Modifier.height(32.dp))
+            Spacer(Modifier.height(16.dp))
+            Row(Modifier.fillMaxWidth(),Arrangement.SpaceAround,Alignment.CenterVertically) {
+                FredIconButton({ controller.navigateUp() },Outlined.ArrowBackIosNew, stringResource(string.goBack))
+                this@Box.ShowInternetInfo ({ viewModel.getData(animalType,amount.toInt()) }, state.first)
+                FredIconButton({ controller.navigate(ExamScreenRoutes.Favorites.route) }, Outlined.FavoriteBorder,stringResource(string.favourites))
+            }
+            Spacer(Modifier.height(16.dp))
             LazyColumn(Modifier.fillMaxSize()) {
                 items(state.second) { fact ->
-                    ListItem(fact,Modifier.fillMaxWidth())
-                    Spacer(Modifier.height(16.dp))
-                }
-                item {
-                    Row(Modifier.fillMaxWidth(),Arrangement.SpaceAround,Alignment.CenterVertically) {
-                        FredIconButton({ controller.navigateUp() },Outlined.ArrowBackIosNew, stringResource(string.goBack))
-                        this@Box.ShowInternetInfo ({ viewModel.getData(animalType,amount.toInt()) }, state.first)
-                        FredIconButton({ controller.navigate(ExamScreenRoutes.Favorites.route) }, Outlined.FavoriteBorder,stringResource(string.favourites))
-                    }
+                    ListItem(fact,{ viewModel.updateData(it) },Modifier.fillMaxWidth())
                     Spacer(Modifier.height(16.dp))
                 }
             }
@@ -64,7 +62,7 @@ fun BoxScope.ShowInternetInfo(action: () -> Unit,state: Status) {
         action,
         Modifier.align(Alignment.BottomCenter),
         enabled = when(state) {
-            Status.LOADING, Status.SUCCESS -> false
+            Status.LOADING -> false
             else -> true
         }
     ) {
