@@ -22,8 +22,8 @@ class AnimalFactsRepository(
             if(result == null) data.emit(Status.NO_DATA to listOfFacts)
             else {
                 result.forEach {
-                    dao.delete(AnimalFactsEntity(it.text,animalType,amount,false))
-                    dao.insert(AnimalFactsEntity(it.text,animalType,amount,false))
+                    dao.delete(AnimalFactsEntity(it.text,animalType,false))
+                    dao.insert(AnimalFactsEntity(it.text,animalType,false))
                 }
                 data.emit(Status.SUCCESS to dao.getAll())
             }
@@ -36,4 +36,5 @@ class AnimalFactsRepository(
         }
         return data
     }
+    override suspend fun updateEntity(animalFacts: AnimalFactsEntity) = dao.insert(animalFacts)
 }

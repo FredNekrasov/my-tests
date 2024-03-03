@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface IAnimalFactsRepository {
     suspend fun getList(animalType: String, amount: Int): StateFlow<Pair<Status,List<AnimalFactsEntity>>>
+    suspend fun updateEntity(animalFacts: AnimalFactsEntity)
 }
