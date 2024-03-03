@@ -13,4 +13,5 @@ class AnimalFactsUseCase(private val repository: IAnimalFactsRepository) : IAnim
         val facts = factsEntity.map { it.toDomain() }
         return MutableStateFlow(status to facts)
     }
+    override suspend fun updateFact(animalFacts: AnimalFacts) = repository.updateEntity(animalFacts.toEntity())
 }

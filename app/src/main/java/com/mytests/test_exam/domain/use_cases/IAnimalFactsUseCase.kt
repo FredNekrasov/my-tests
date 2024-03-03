@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface IAnimalFactsUseCase {
     suspend fun getAnimalFacts(animalType: String, amount: Int): StateFlow<Pair<Status,List<AnimalFacts>>>
+    suspend fun updateFact(animalFacts: AnimalFacts)
 }
