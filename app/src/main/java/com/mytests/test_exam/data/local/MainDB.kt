@@ -9,7 +9,7 @@ import com.mytests.test_exam.data.local.entities.UserEntity
 
 @Database(
     entities = [UserEntity::class,AnimalFactsEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class MainDB : RoomDatabase() {
