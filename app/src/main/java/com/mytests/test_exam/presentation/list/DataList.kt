@@ -42,7 +42,9 @@ fun DataList(controller: NavHostController,viewModel: AnimalFactsVM) {
             Spacer(Modifier.height(16.dp))
             Row(Modifier.fillMaxWidth(),Arrangement.SpaceAround,Alignment.CenterVertically) {
                 FredIconButton({ controller.navigateUp() },Outlined.ArrowBackIosNew, stringResource(string.goBack))
-                this@Box.ShowInternetInfo ({ viewModel.getData(animalType,amount.toInt()) }, state.first)
+                this@Box.ShowInternetInfo ({
+                    if(animalType.isNotEmpty() && amount.isNotEmpty()) viewModel.getData(animalType,amount.toInt()) else viewModel.getData()
+                }, state.first)
                 FredIconButton({ controller.navigate(ExamScreenRoutes.Favorites.route) }, Outlined.FavoriteBorder,stringResource(string.favourites))
             }
             Spacer(Modifier.height(16.dp))
