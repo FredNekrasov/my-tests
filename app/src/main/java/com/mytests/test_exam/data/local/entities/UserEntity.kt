@@ -12,5 +12,5 @@ data class UserEntity(
     val surname: String,
     @PrimaryKey(autoGenerate = true) val id: Int? = null
 ) {
-    fun toDomain() = User(userName, password, email, name, surname)
+    fun toDomain() = User(userName, password, email, name, surname, id)
 }
