@@ -22,7 +22,7 @@
     <string name="logIn">Log In</string>
     <string name="signUp">Sign Up</string>
     <string name="goBack">Go back</string>
-    <string name="delete">DeleteUser</string>
+    <string name="delete">user data has been deleted</string>
 
     <string name="existingUser">The user already exists</string>
 
