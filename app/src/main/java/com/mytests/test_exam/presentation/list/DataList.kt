@@ -72,7 +72,7 @@ fun BoxScope.ShowInternetInfo(action: () -> Unit,state: Status) {
                 Status.SUCCESS -> stringResource(string.SUCCESS)
                 Status.NO_DATA -> "${stringResource(string.NO_DATA)}\n${tryAgain}"
                 Status.ERROR -> "${stringResource(string.CONNECTION_ERROR)} or ${stringResource(string.NO_INTERNET)}\n${tryAgain}"
-                Status.NONE -> ""
+                Status.NONE -> "get data"
             },textAlign = TextAlign.Center
         )
     }
