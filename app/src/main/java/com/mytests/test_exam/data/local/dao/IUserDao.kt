@@ -5,7 +5,7 @@ import com.mytests.test_exam.data.local.entities.UserEntity
 
 @Dao
 interface IUserDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: UserEntity)
     @Delete
     fun delete(user: UserEntity)

@@ -5,7 +5,7 @@ import com.mytests.test_exam.data.local.entities.AnimalFactsEntity
 
 @Dao
 interface IAnimalFactsDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(catFacts: AnimalFactsEntity)
     @Delete
     fun delete(catFacts: AnimalFactsEntity)
