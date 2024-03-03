@@ -7,10 +7,9 @@ import com.mytests.test_exam.domain.model.AnimalFacts
 data class AnimalFactsEntity(
     val text: String,
     val animalType: String,
-    val amount: Int,
     val isFavorite: Boolean,
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null
 ) {
-    fun toDomain() = AnimalFacts(text, animalType, isFavorite)
+    fun toDomain() = AnimalFacts(text, animalType, isFavorite, id)
 }
