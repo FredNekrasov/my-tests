@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.mytests.test_exam.presentation.ExamScaffold
+import com.mytests.testExam.presentation.ExamScaffold
 import com.mytests.ui.theme.MyTestsTheme
 
 class MainActivity : ComponentActivity() {

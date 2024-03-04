@@ -1,7 +1,7 @@
 package com.mytests
 
 import android.app.Application
-import com.mytests.test_exam.di.*
+import com.mytests.testExam.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
