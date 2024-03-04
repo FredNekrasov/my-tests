@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.mytests.R.string
 import com.mytests.test_exam.domain.model.User
-import com.mytests.ui.custom_items.FredCardView
+import com.mytests.ui.customItems.FredCardView
 
 @Composable
 fun UserInfo(user: User?, onDeleteClick: () -> Unit, modifier: Modifier) {

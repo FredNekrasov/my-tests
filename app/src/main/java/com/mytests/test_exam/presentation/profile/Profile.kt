@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.mytests.R.string
 import com.mytests.test_exam.presentation.profile.view_model.UserVM
-import com.mytests.ui.custom_items.*
+import com.mytests.ui.customItems.*
 import com.mytests.ui.screen_routes.ExamScreenRoutes
 
 @Composable

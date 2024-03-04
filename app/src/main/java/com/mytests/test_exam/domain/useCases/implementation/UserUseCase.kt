@@ -1,8 +1,8 @@
-package com.mytests.test_exam.domain.use_cases.implementation
+package com.mytests.test_exam.domain.useCases.implementation
 
 import com.mytests.test_exam.domain.model.User
 import com.mytests.test_exam.domain.repository.IUserRepository
-import com.mytests.test_exam.domain.use_cases.IUserUseCase
+import com.mytests.test_exam.domain.useCases.IUserUseCase
 
 class UserUseCase(private val repository: IUserRepository) : IUserUseCase {
     override fun authorization(userName: String,password: String): User? {

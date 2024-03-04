@@ -1,8 +1,8 @@
-package com.mytests.test_exam.domain.use_cases.implementation
+package com.mytests.test_exam.domain.useCases.implementation
 
 import com.mytests.test_exam.domain.model.AnimalFacts
 import com.mytests.test_exam.domain.repository.IAnimalFactsRepository
-import com.mytests.test_exam.domain.use_cases.IAnimalFactsUseCase
+import com.mytests.test_exam.domain.useCases.IAnimalFactsUseCase
 import com.mytests.test_exam.domain.util.Status
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -1,4 +1,4 @@
-package com.mytests.test_exam.presentation.special_views
+package com.mytests.test_exam.presentation.specialViews
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults

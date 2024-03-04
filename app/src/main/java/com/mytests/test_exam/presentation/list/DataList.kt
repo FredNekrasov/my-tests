@@ -18,7 +18,7 @@ import androidx.navigation.NavHostController
 import com.mytests.R.string
 import com.mytests.test_exam.domain.util.Status
 import com.mytests.test_exam.presentation.list.view_model.AnimalFactsVM
-import com.mytests.ui.custom_items.*
+import com.mytests.ui.customItems.*
 import com.mytests.ui.screen_routes.ExamScreenRoutes
 
 @Composable

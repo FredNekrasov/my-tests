@@ -6,7 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mytests.test_exam.domain.model.AnimalFacts
-import com.mytests.ui.custom_items.*
+import com.mytests.ui.customItems.*
 
 @Composable
 fun ListItem(fact: AnimalFacts,onUpdate: (AnimalFacts) -> Unit, modifier: Modifier = Modifier) {

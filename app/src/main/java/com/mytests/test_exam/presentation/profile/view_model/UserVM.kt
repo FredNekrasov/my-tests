@@ -2,7 +2,7 @@ package com.mytests.test_exam.presentation.profile.view_model
 
 import androidx.lifecycle.*
 import com.mytests.test_exam.domain.model.User
-import com.mytests.test_exam.domain.use_cases.IUserUseCase
+import com.mytests.test_exam.domain.useCases.IUserUseCase
 import com.mytests.test_exam.domain.util.AuthStatus
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

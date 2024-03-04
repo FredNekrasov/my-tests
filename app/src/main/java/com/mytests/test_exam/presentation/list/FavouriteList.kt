@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.mytests.R
 import com.mytests.test_exam.presentation.list.view_model.AnimalFactsVM
-import com.mytests.ui.custom_items.*
+import com.mytests.ui.customItems.*
 
 @Composable
 fun FavouriteList(controller: NavHostController,viewModel: AnimalFactsVM) {

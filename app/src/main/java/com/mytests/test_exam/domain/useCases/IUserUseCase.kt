@@ -1,4 +1,4 @@
-package com.mytests.test_exam.domain.use_cases
+package com.mytests.test_exam.domain.useCases
 
 import com.mytests.test_exam.domain.model.User
 

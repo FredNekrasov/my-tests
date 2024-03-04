@@ -1,4 +1,4 @@
-package com.mytests.ui.custom_items
+package com.mytests.ui.customItems
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.text.KeyboardOptions

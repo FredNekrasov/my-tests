@@ -12,8 +12,8 @@ import com.mytests.R
 import com.mytests.test_exam.domain.util.AuthStatus.SUCCESS
 import com.mytests.test_exam.domain.util.AuthStatus.USER_NOT_FOUND
 import com.mytests.test_exam.presentation.profile.view_model.UserVM
-import com.mytests.test_exam.presentation.special_views.UserNameTF
-import com.mytests.ui.custom_items.*
+import com.mytests.test_exam.presentation.specialViews.UserNameTF
+import com.mytests.ui.customItems.*
 import com.mytests.ui.screen_routes.ExamScreenRoutes
 
 @Composable

@@ -2,7 +2,7 @@ package com.mytests.test_exam.presentation.list.view_model
 
 import androidx.lifecycle.*
 import com.mytests.test_exam.domain.model.AnimalFacts
-import com.mytests.test_exam.domain.use_cases.IAnimalFactsUseCase
+import com.mytests.test_exam.domain.useCases.IAnimalFactsUseCase
 import com.mytests.test_exam.domain.util.Status
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.*
