@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.mytests.R.string
+import com.mytests.testExam.domain.model.AnimalFacts
 import com.mytests.testExam.domain.util.Status
 import com.mytests.testExam.presentation.list.view_model.AnimalFactsVM
 import com.mytests.ui.customItems.*
@@ -50,7 +51,12 @@ fun DataList(controller: NavHostController,viewModel: AnimalFactsVM) {
             Spacer(Modifier.height(16.dp))
             LazyColumn(Modifier.fillMaxSize()) {
                 items(state.second) { fact ->
-                    ListItem(fact,{ viewModel.updateData(it) },Modifier.fillMaxWidth())
+                    var isFavorite by remember { mutableStateOf(fact.isFavorite) }
+                    ListItem(fact, isFavorite, { it: AnimalFacts, isFav: Boolean ->
+                        viewModel.updateData(it)
+                        isFavorite = isFav
+                        fact.isFavorite = isFav
+                    }, Modifier.fillMaxWidth())
                     Spacer(Modifier.height(16.dp))
                 }
             }

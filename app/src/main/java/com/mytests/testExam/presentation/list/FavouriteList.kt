@@ -8,6 +8,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.mytests.R
+import com.mytests.testExam.domain.model.AnimalFacts
 import com.mytests.testExam.presentation.list.view_model.AnimalFactsVM
 import com.mytests.ui.customItems.*
 
@@ -21,7 +22,12 @@ fun FavouriteList(controller: NavHostController,viewModel: AnimalFactsVM) {
             LazyColumn(Modifier.fillMaxWidth()) {
                 items(state.second) { fact ->
                     if(fact.isFavorite) {
-                        ListItem(fact,{ viewModel.updateData(it) },Modifier.fillMaxWidth())
+                        var isFavorite by remember { mutableStateOf(fact.isFavorite) }
+                        ListItem(fact, isFavorite, { it: AnimalFacts, isFav: Boolean ->
+                            viewModel.updateData(it)
+                            isFavorite = isFav
+                            fact.isFavorite = isFav
+                        }, Modifier.fillMaxWidth())
                         Spacer(Modifier.height(16.dp))
                     }
                 }

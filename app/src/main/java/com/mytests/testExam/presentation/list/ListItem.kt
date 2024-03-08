@@ -9,8 +9,12 @@ import com.mytests.testExam.domain.model.AnimalFacts
 import com.mytests.ui.customItems.*
 
 @Composable
-fun ListItem(fact: AnimalFacts,onUpdate: (AnimalFacts) -> Unit, modifier: Modifier = Modifier) {
-    var isFavorite by remember { mutableStateOf(fact.isFavorite) }
+fun ListItem(
+    fact: AnimalFacts,
+    isFavorite: Boolean,
+    onUpdate: (AnimalFacts, Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Box(modifier) {
         FredCardView(Modifier.matchParentSize(),MaterialTheme.colorScheme.tertiary,MaterialTheme.colorScheme.onTertiary)
         Column(Modifier.fillMaxSize().padding(16.dp)) {
@@ -18,11 +22,7 @@ fun ListItem(fact: AnimalFacts,onUpdate: (AnimalFacts) -> Unit, modifier: Modifi
             Spacer(modifier = Modifier.height(8.dp))
             FredText(fact.animalType)
             Spacer(modifier = Modifier.height(8.dp))
-            FredCheckbox(isFavorite) {
-                fact.isFavorite = it
-                isFavorite = it
-                onUpdate(fact)
-            }
+            FredCheckbox(isFavorite) { onUpdate(fact, it) }
         }
     }
 }
