@@ -10,6 +10,9 @@ import kotlinx.coroutines.*
 class AnimalFactsVM(private val animalFactsUseCase: IAnimalFactsUseCase) : ViewModel() {
     private val resultMSF = MutableStateFlow(Status.NONE to emptyList<AnimalFacts>())
     val resultSF = resultMSF.asStateFlow()
+    init {
+        getData()
+    }
     fun getData(animalType: String = "cat",amount: Int = 2) {
         viewModelScope.launch {
             resultMSF.emit(Status.LOADING to emptyList())
