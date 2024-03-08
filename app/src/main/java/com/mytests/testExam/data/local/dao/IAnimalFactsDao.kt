@@ -6,9 +6,9 @@ import com.mytests.testExam.data.local.entities.AnimalFactsEntity
 @Dao
 interface IAnimalFactsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(catFacts: AnimalFactsEntity)
+    suspend fun insert(catFacts: AnimalFactsEntity)
     @Delete
-    fun delete(catFacts: AnimalFactsEntity)
+    suspend fun delete(catFacts: AnimalFactsEntity)
     @Query("SELECT * FROM AnimalFactsEntity")
-    fun getAll(): List<AnimalFactsEntity>
+    suspend fun getAll(): List<AnimalFactsEntity>
 }

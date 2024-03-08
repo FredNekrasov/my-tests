@@ -6,9 +6,9 @@ import com.mytests.testExam.data.local.entities.UserEntity
 @Dao
 interface IUserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: UserEntity)
+    suspend fun insert(user: UserEntity)
     @Delete
-    fun delete(user: UserEntity)
+    suspend fun delete(user: UserEntity)
     @Query("SELECT * FROM userentity")
-    fun getAll(): List<UserEntity>
+    suspend fun getAll(): List<UserEntity>
 }
