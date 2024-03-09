@@ -7,7 +7,7 @@ import androidx.compose.ui.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.mytests.R
 import com.mytests.testExam.domain.util.AuthStatus.SUCCESS
 import com.mytests.testExam.domain.util.AuthStatus.USER_NOT_FOUND
@@ -17,7 +17,7 @@ import com.mytests.ui.customItems.*
 import com.mytests.ui.screenRoutes.ExamScreenRoutes
 
 @Composable
-fun Authorization(controller: NavController,userVM: UserVM) {
+fun Authorization(controller: NavHostController,userVM: UserVM) {
     val userData = userVM.resultSF.collectAsState().value
     var userName by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
