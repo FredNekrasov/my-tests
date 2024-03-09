@@ -78,14 +78,7 @@ fun FredCheckbox(value: Boolean, onCheckedChange: (Boolean) -> Unit) {
     Checkbox(
         value,
         onCheckedChange,
-        colors = CheckboxDefaults.colors(
-            checkedColor = MaterialTheme.colorScheme.surfaceVariant,
-            uncheckedColor = MaterialTheme.colorScheme.onSurfaceVariant,
-            checkmarkColor = MaterialTheme.colorScheme.onErrorContainer,
-            disabledCheckedColor = MaterialTheme.colorScheme.primary,
-            disabledUncheckedColor = MaterialTheme.colorScheme.onPrimary,
-            disabledIndeterminateColor = MaterialTheme.colorScheme.onTertiaryContainer
-        )
+        colors = CheckboxDefaults.colors()
     )
 }
 @Composable
