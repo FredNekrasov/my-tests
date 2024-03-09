@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.*
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,7 +37,7 @@ fun DataList(controller: NavHostController,viewModel: AnimalFactsVM) {
             TextField(
                 amount,
                 { amount = it },
-                placeholder = { Text(stringResource(string.enterAmount)) },
+                placeholder = { Text(stringResource(string.enterAmount),fontFamily = FontFamily.Serif,color = MaterialTheme.colorScheme.onTertiaryContainer) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 colors = OutlinedTextFieldDefaults.colors()
             )
