@@ -26,8 +26,9 @@ class UserVM(private val useCases: UserUseCases) : ViewModel() {
     }
     fun delete() {
         viewModelScope.launch {
-            useCases.del.deleteUser(resultSF.value.second ?: return@launch)
-            resultMSF.emit(AuthStatus.DELETED to null)
+            useCases.del.deleteUser(resultSF.value.second ?: return@launch).also {
+                resultMSF.emit(AuthStatus.DELETED to null)
+            }
         }
     }
 }
