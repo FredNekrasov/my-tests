@@ -5,7 +5,7 @@ import com.mytests.testExam.domain.useCases.user.delete.IDeleteUserUseCase
 import com.mytests.testExam.domain.useCases.user.registration.IRegistrationUseCase
 
 data class UserUseCases(
-    val auth: IAuthorizationUseCase,
-    val reg: IRegistrationUseCase,
-    val del: IDeleteUserUseCase
+    val authorizationUseCase : IAuthorizationUseCase,
+    val registrationUseCase : IRegistrationUseCase,
+    val deleteUserUseCase : IDeleteUserUseCase
 )

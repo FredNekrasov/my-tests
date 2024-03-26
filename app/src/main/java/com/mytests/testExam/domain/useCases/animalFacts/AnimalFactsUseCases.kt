@@ -4,6 +4,6 @@ import com.mytests.testExam.domain.useCases.animalFacts.get.IGetAnimalFactsUseCa
 import com.mytests.testExam.domain.useCases.animalFacts.update.IUpdateFactUseCase
 
 data class AnimalFactsUseCases(
-    val getFacts: IGetAnimalFactsUseCase,
-    val updateFact: IUpdateFactUseCase
+    val getAnimalFacts: IGetAnimalFactsUseCase,
+    val updateAnimalFact: IUpdateFactUseCase
 )
