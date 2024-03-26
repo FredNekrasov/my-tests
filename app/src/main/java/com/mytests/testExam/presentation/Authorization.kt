@@ -3,7 +3,8 @@ package com.mytests.testExam.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -11,13 +12,14 @@ import androidx.navigation.NavHostController
 import com.mytests.R
 import com.mytests.testExam.domain.util.AuthStatus.SUCCESS
 import com.mytests.testExam.domain.util.AuthStatus.USER_NOT_FOUND
+import com.mytests.testExam.presentation.profile.view_model.UserEvent
 import com.mytests.testExam.presentation.profile.view_model.UserVM
 import com.mytests.testExam.presentation.specialViews.UserNameTF
 import com.mytests.ui.customItems.*
 import com.mytests.ui.screenRoutes.ExamScreenRoutes
 
 @Composable
-fun Authorization(controller: NavHostController,userVM: UserVM) {
+fun Authorization(controller : NavHostController, userVM : UserVM) {
     val userData = userVM.resultSF.collectAsState().value
     var userName by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -26,7 +28,7 @@ fun Authorization(controller: NavHostController,userVM: UserVM) {
     Column(Modifier.fillMaxSize(),Arrangement.Center,Alignment.CenterHorizontally) {
         FredTextHeader(stringResource(R.string.authorization))
         Spacer(Modifier.height(64.dp))
-        UserNameTF(userName,{ userName = it },isUserNameCorrect)
+        UserNameTF(userName, { userName = it }, isUserNameCorrect)
         Spacer(Modifier.height(8.dp))
         CustomOutlinedTF(
             password,
@@ -40,14 +42,17 @@ fun Authorization(controller: NavHostController,userVM: UserVM) {
         FredButton({
             isUserNameCorrect = userName.isBlank()
             isPasswordCorrect = password.isBlank() || password.length < 8
-            if(!isUserNameCorrect && !isPasswordCorrect) userVM.authorization(userName, password)
-        },stringResource(R.string.logIn))
+            if(!isUserNameCorrect && !isPasswordCorrect) userVM.onUserEvent(UserEvent.Authorization(userName, password))
+        }, stringResource(R.string.logIn))
         Spacer(Modifier.height(8.dp))
-        FredButton({ controller.navigate(ExamScreenRoutes.Registration.route) },stringResource(R.string.registration))
-        if(userData.first == SUCCESS) controller.navigate(ExamScreenRoutes.Profile.route)
-        if(userData.first == USER_NOT_FOUND) {
-            isUserNameCorrect = true
-            isPasswordCorrect = true
+        FredButton({ controller.navigate(ExamScreenRoutes.Registration.route) }, stringResource(R.string.registration))
+        when(userData.status) {
+            USER_NOT_FOUND -> {
+                isUserNameCorrect = true
+                isPasswordCorrect = true
+            }
+            SUCCESS -> controller.navigate(ExamScreenRoutes.Profile.route)
+            else -> {}
         }
     }
 }
