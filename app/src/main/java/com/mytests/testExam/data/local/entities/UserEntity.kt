@@ -1,7 +1,7 @@
 package com.mytests.testExam.data.local.entities
 
-import androidx.room.*
-import com.mytests.testExam.domain.model.User
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class UserEntity(
@@ -11,6 +11,4 @@ data class UserEntity(
     val name: String,
     val surname: String,
     @PrimaryKey(autoGenerate = true) val id: Int? = null
-) {
-    fun toDomain() = User(userName, password, email, name, surname, id)
-}
+)

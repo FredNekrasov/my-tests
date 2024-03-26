@@ -1,7 +1,7 @@
 package com.mytests.testExam.data.local.entities
 
-import androidx.room.*
-import com.mytests.testExam.domain.model.AnimalFacts
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class AnimalFactsEntity(
@@ -10,6 +10,4 @@ data class AnimalFactsEntity(
     val isFavorite: Boolean,
     @PrimaryKey(autoGenerate = true)
     val id: Int? = null
-) {
-    fun toDomain() = AnimalFacts(text, animalType, isFavorite, id)
-}
+)
