@@ -3,32 +3,34 @@ package com.mytests.testExam.presentation.profile.view_model
 import androidx.lifecycle.*
 import com.mytests.testExam.domain.model.User
 import com.mytests.testExam.domain.useCases.user.UserUseCases
-import com.mytests.testExam.domain.util.AuthStatus
+import com.mytests.testExam.domain.util.UserData
+import com.mytests.testExam.presentation.profile.view_model.UserEvent.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class UserVM(private val useCases: UserUseCases) : ViewModel() {
-    private val resultMSF = MutableStateFlow<Pair<AuthStatus,User?>>(AuthStatus.EMPTY_USER to null)
+    private val resultMSF = MutableStateFlow<UserData>(UserData.EmptyUser)
     val resultSF = resultMSF.asStateFlow()
-    fun authorization(userName: String, password: String) {
-        viewModelScope.launch {
-            useCases.auth.authorization(userName,password).also {
-                if(it == null) resultMSF.emit(AuthStatus.USER_NOT_FOUND to null) else resultMSF.emit(AuthStatus.SUCCESS to it)
-            }
+    fun onUserEvent(event : UserEvent) {
+        when(event) {
+            is Authorization -> authorization(event.login, event.password)
+            DeleteUser -> delete()
+            is Registration -> registration(event.user)
         }
     }
-    fun registration(user: User) {
+    private fun authorization(userName: String, password: String) {
         viewModelScope.launch {
-            useCases.reg.registration(user).also {
-                if(it == null) resultMSF.emit(AuthStatus.EXISTING_USER to null) else resultMSF.emit(AuthStatus.SUCCESS to it)
-            }
+            useCases.authorizationUseCase.authorization(userName,password).also { resultMSF.emit(it) }
         }
     }
-    fun delete() {
+    private fun registration(user: User) {
         viewModelScope.launch {
-            useCases.del.deleteUser(resultSF.value.second ?: return@launch).also {
-                resultMSF.emit(AuthStatus.DELETED to null)
-            }
+            useCases.registrationUseCase.registration(user).also { resultMSF.emit(it) }
+        }
+    }
+    private fun delete() {
+        viewModelScope.launch {
+            useCases.deleteUserUseCase.deleteUser(resultSF.value.user).also { resultMSF.emit(it) }
         }
     }
 }
