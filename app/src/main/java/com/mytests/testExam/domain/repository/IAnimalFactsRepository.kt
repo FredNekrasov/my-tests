@@ -1,10 +1,10 @@
 package com.mytests.testExam.domain.repository
 
-import com.mytests.testExam.data.local.entities.AnimalFactsEntity
-import com.mytests.testExam.domain.util.Status
+import com.mytests.testExam.domain.model.AnimalFacts
+import com.mytests.testExam.domain.util.ConnectionStatus
 import kotlinx.coroutines.flow.StateFlow
 
 interface IAnimalFactsRepository {
-    suspend fun getList(animalType: String, amount: Int): StateFlow<Pair<Status,List<AnimalFactsEntity>>>
-    suspend fun updateEntity(animalFacts: AnimalFactsEntity)
+    suspend fun getList(animalType: String, amount: Int): StateFlow<Pair<ConnectionStatus,List<AnimalFacts>>>
+    suspend fun updateEntity(animalFacts: AnimalFacts)
 }
