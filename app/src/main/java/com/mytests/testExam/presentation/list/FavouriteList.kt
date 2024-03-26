@@ -9,12 +9,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.mytests.R
 import com.mytests.testExam.domain.model.AnimalFacts
+import com.mytests.testExam.presentation.list.view_model.AnimalFactEvent
 import com.mytests.testExam.presentation.list.view_model.AnimalFactsVM
 import com.mytests.ui.customItems.*
 
 @Composable
-fun FavouriteList(controller: NavHostController,viewModel: AnimalFactsVM) {
-    val state = viewModel.resultSF.collectAsState().value
+fun FavouriteList(controller : NavHostController, animalFactsVM : AnimalFactsVM) {
+    val state = animalFactsVM.resultSF.collectAsState().value
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize(), Arrangement.Center, Alignment.CenterHorizontally) {
             FredTextHeader(stringResource(R.string.favourites))
@@ -24,9 +25,9 @@ fun FavouriteList(controller: NavHostController,viewModel: AnimalFactsVM) {
                     if(fact.isFavorite) {
                         var isFavorite by remember { mutableStateOf(fact.isFavorite) }
                         ListItem(fact, isFavorite, { it: AnimalFacts, isFav: Boolean ->
-                            viewModel.updateData(it)
                             isFavorite = isFav
                             fact.isFavorite = isFav
+                            animalFactsVM.onEvent(AnimalFactEvent.UpdateAnimalFacts(it))
                         }, Modifier.fillMaxWidth())
                         Spacer(Modifier.height(16.dp))
                     }
