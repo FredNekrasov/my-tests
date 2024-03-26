@@ -9,13 +9,13 @@ import com.mytests.testExam.data.local.entities.UserEntity
 
 @Database(
     entities = [UserEntity::class,AnimalFactsEntity::class],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
-abstract class MainDB : RoomDatabase() {
+abstract class ExamDb : RoomDatabase() {
     abstract val userDao: IUserDao
     abstract val animalFactsDao: IAnimalFactsDao
     companion object {
-        const val DATABASE_NAME = "exam_db"
+        const val DATABASE_NAME = "exam.db"
     }
 }
