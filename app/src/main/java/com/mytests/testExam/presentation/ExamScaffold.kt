@@ -15,13 +15,13 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ExamScaffold(displayMessage: (String) -> Unit) {
     val controller = rememberNavController()
-    val viewModel: AnimalFactsVM = koinViewModel()
+    val animalFactsVM: AnimalFactsVM = koinViewModel()
     val userVM: UserVM = koinViewModel()
     NavHost(controller, ExamScreenRoutes.Authorization.route) {
-        composable(ExamScreenRoutes.Authorization.route) { Authorization(controller,userVM) }
-        composable(ExamScreenRoutes.Registration.route) { Registration(controller,userVM) }
-        composable(ExamScreenRoutes.Profile.route) { Profile(controller,userVM,displayMessage) }
-        composable(ExamScreenRoutes.DataList.route) { DataList(controller,viewModel) }
-        composable(ExamScreenRoutes.Favorites.route) { FavouriteList(controller,viewModel) }
+        composable(ExamScreenRoutes.Authorization.route) { Authorization(controller, userVM) }
+        composable(ExamScreenRoutes.Registration.route) { Registration(controller, userVM) }
+        composable(ExamScreenRoutes.Profile.route) { Profile(controller, userVM, displayMessage) }
+        composable(ExamScreenRoutes.DataList.route) { DataList(controller, animalFactsVM) }
+        composable(ExamScreenRoutes.Favorites.route) { FavouriteList(controller, animalFactsVM) }
     }
 }

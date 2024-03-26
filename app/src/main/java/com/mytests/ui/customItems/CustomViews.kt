@@ -82,7 +82,7 @@ fun FredCheckbox(value: Boolean, onCheckedChange: (Boolean) -> Unit) {
     )
 }
 @Composable
-fun FredIconButton(click: () -> Unit,image: ImageVector,description: String,modifier: Modifier = Modifier){
+fun FredIconButton(click : () -> Unit, image : ImageVector, description : String, modifier : Modifier = Modifier) {
     IconButton(click, modifier) { Icon(image, description) }
 }
 @Composable
@@ -97,8 +97,8 @@ fun CustomOutlinedTF(
     OutlinedTextField(
         value,
         onValueChange,
-        label = { Text(stringResource(labelId),fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onTertiaryContainer) },
-        supportingText = { if(isValueCorrect) Text(stringResource(errorId),color = MaterialTheme.colorScheme.error,fontFamily = FontFamily.Serif) },
+        label = { Text(stringResource(labelId), fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onTertiaryContainer) },
+        supportingText = { if(isValueCorrect) Text(stringResource(errorId), color = MaterialTheme.colorScheme.error, fontFamily = FontFamily.Serif) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         isError = isValueCorrect,
         shape = MaterialTheme.shapes.medium,

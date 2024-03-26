@@ -13,7 +13,7 @@ import com.mytests.testExam.domain.model.User
 import com.mytests.ui.customItems.FredCardView
 
 @Composable
-fun UserInfo(user: User?, onDeleteClick: () -> Unit, modifier: Modifier) {
+fun UserInfo(user : User?, onDeleteClick : () -> Unit, modifier : Modifier) {
     if (user != null) {
         Box(modifier) {
             FredCardView(Modifier.matchParentSize(),MaterialTheme.colorScheme.onSecondaryContainer,MaterialTheme.colorScheme.secondaryContainer)
@@ -29,7 +29,7 @@ fun UserInfo(user: User?, onDeleteClick: () -> Unit, modifier: Modifier) {
                 Text("${stringResource(string.surname)}: ${user.surname}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.secondaryContainer)
                 Spacer(Modifier.height(8.dp))
             }
-            IconButton(onDeleteClick, Modifier.align(Alignment.BottomEnd)) { Icon(Icons.Default.Delete,stringResource(string.delete), tint = MaterialTheme.colorScheme.secondaryContainer) }
+            IconButton(onDeleteClick, Modifier.align(Alignment.BottomEnd)) { Icon(Icons.Default.Delete, stringResource(string.delete), tint = MaterialTheme.colorScheme.secondaryContainer) }
         }
     }
 }

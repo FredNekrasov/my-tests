@@ -1,7 +1,7 @@
 package com.mytests.testExam.di
 
 import androidx.room.Room
-import com.mytests.testExam.data.local.MainDB
+import com.mytests.testExam.data.local.ExamDb
 import com.mytests.testExam.data.local.dao.IAnimalFactsDao
 import com.mytests.testExam.data.local.dao.IUserDao
 import com.mytests.testExam.data.remote.service.IAnimalFactsService
@@ -20,9 +20,9 @@ val dataExamModule = module {
             .build()
             .create(IAnimalFactsService::class.java)
     }
-    single<MainDB> { Room.databaseBuilder(get(),MainDB::class.java,MainDB.DATABASE_NAME).allowMainThreadQueries().build() }
-    single<IUserDao> { get<MainDB>().userDao }
-    single<IAnimalFactsDao> { get<MainDB>().animalFactsDao }
+    single<ExamDb> { Room.databaseBuilder(get(), ExamDb::class.java, ExamDb.DATABASE_NAME).allowMainThreadQueries().build() }
+    single<IUserDao> { get<ExamDb>().userDao }
+    single<IAnimalFactsDao> { get<ExamDb>().animalFactsDao }
 
     single<IAnimalFactsRepository> { AnimalFactsRepository(get(), get()) }
     single<IUserRepository> { UserRepository(get()) }
