@@ -1,10 +1,13 @@
 package com.mytests.testExam.data.repository
 
 import com.mytests.testExam.data.local.dao.IAnimalFactsDao
-import com.mytests.testExam.data.local.entities.AnimalFactsEntity
+import com.mytests.testExam.data.mappers.toDomain
+import com.mytests.testExam.data.mappers.toEntity
 import com.mytests.testExam.data.remote.service.IAnimalFactsService
+import com.mytests.testExam.domain.model.AnimalFacts
 import com.mytests.testExam.domain.repository.IAnimalFactsRepository
-import com.mytests.testExam.domain.util.Status
+import com.mytests.testExam.domain.util.ConnectionStatus
+import com.mytests.testExam.domain.util.ConnectionStatus.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import retrofit2.HttpException
@@ -14,27 +17,29 @@ class AnimalFactsRepository(
     private val dao: IAnimalFactsDao,
     private val api: IAnimalFactsService
 ) : IAnimalFactsRepository {
-    override suspend fun getList(animalType: String,amount: Int): StateFlow<Pair<Status,List<AnimalFactsEntity>>> {
-        val listOfFacts = dao.getAll()
-        val data = MutableStateFlow(Status.LOADING to listOfFacts)
+    override suspend fun updateEntity(animalFacts : AnimalFacts) = dao.insert(animalFacts.toEntity())
+    override suspend fun getList(
+        animalType : String, amount : Int
+    ): StateFlow<Pair<ConnectionStatus, List<AnimalFacts>>> {
+        val listOfFacts = dao.getAll().map { it.toDomain() }
+        val data = MutableStateFlow(LOADING to listOfFacts)
         try {
             val result = api.getCatFacts(animalType, amount)
-            if(result == null) data.emit(Status.NO_DATA to listOfFacts)
+            if(result == null) data.emit(NO_DATA to listOfFacts)
             else {
                 result.forEach {
-                    dao.delete(AnimalFactsEntity(it.text,animalType,false))
-                    dao.insert(AnimalFactsEntity(it.text,animalType,false))
+                    dao.delete(it.toEntity())
+                    dao.insert(it.toEntity())
                 }
-                data.emit(Status.SUCCESS to dao.getAll())
+                data.emit(SUCCESS to dao.getAll().map { it.toDomain() })
             }
-        } catch (e: Exception) {
-            data.emit(Status.ERROR to listOfFacts)
         } catch (e: HttpException) {
-            data.emit(Status.ERROR to listOfFacts)
+            data.emit(ERROR to listOfFacts)
         } catch (e: IOException) {
-            data.emit(Status.ERROR to listOfFacts)
+            data.emit(ERROR to listOfFacts)
+        } catch (e: Exception) {
+            data.emit(ERROR to listOfFacts)
         }
         return data
     }
-    override suspend fun updateEntity(animalFacts: AnimalFactsEntity) = dao.insert(animalFacts)
 }
