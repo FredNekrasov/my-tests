@@ -21,9 +21,8 @@ class AnimalFactsVM(private val useCases: AnimalFactsUseCases) : ViewModel() {
             is UpdateAnimalFacts -> updateData(event.animalFacts)
         }
     }
-    private fun getData(animalType: String = "cat",amount: Int = 2) {
+    private fun getData(animalType: String = "", amount: Int = 0) {
         viewModelScope.launch {
-            resultMSF.emit(ConnectionStatus.LOADING to emptyList())
             useCases.getAnimalFacts.getAnimalFacts(animalType,amount).collectLatest {
                 resultMSF.emit(it)
             }
