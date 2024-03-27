@@ -23,7 +23,10 @@ class AnimalFactsRepository(
     ): StateFlow<Pair<ConnectionStatus, List<AnimalFacts>>> {
         val listOfFacts = dao.getAll().map { it.toDomain() }
         val data = MutableStateFlow(LOADING to listOfFacts)
-        if(animalType.isEmpty() || animalType.isBlank() || amount <= 0) return data
+        if(animalType.isEmpty() || animalType.isBlank() || amount <= 0) {
+            data.emit(SUCCESS to listOfFacts)
+            return data
+        }
         try {
             val result = api.getCatFacts(animalType, amount)
             if(result == null) data.emit(NO_DATA to listOfFacts)
