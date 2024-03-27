@@ -17,7 +17,8 @@ import com.mytests.ui.customItems.*
 fun FavouriteList(controller : NavHostController, animalFactsVM : AnimalFactsVM) {
     val state = animalFactsVM.resultSF.collectAsState().value
     Box(Modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxSize(), Arrangement.Center, Alignment.CenterHorizontally) {
+        Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(8.dp))
             FredTextHeader(stringResource(R.string.favourites))
             Spacer(Modifier.height(16.dp))
             LazyColumn(Modifier.fillMaxWidth()) {

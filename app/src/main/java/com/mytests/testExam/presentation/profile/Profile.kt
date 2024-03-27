@@ -21,6 +21,7 @@ fun Profile(controller : NavHostController, userVM : UserVM, displayMessage : (S
     val state = userVM.resultSF.collectAsState().value
     val deleteMessage = stringResource(string.delete)
     Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(Modifier.height(8.dp))
         FredTextHeader(stringResource(string.profile))
         Spacer(Modifier.height(16.dp))
         UserInfo(state.user, { userVM.onUserEvent(UserEvent.DeleteUser) }, Modifier.fillMaxWidth())

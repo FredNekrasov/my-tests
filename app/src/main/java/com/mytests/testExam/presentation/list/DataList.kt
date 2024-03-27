@@ -1,8 +1,7 @@
 package com.mytests.testExam.presentation.list
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.*
 import androidx.compose.material.icons.Icons.Outlined
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
 import androidx.compose.material.icons.outlined.FavoriteBorder
@@ -31,21 +30,24 @@ fun DataList(controller : NavHostController, animalFactsVM : AnimalFactsVM) {
     Box(Modifier.fillMaxSize()) {
         if (state.first == ConnectionStatus.LOADING) CircularProgressIndicator(Modifier.align(Alignment.Center))
         Column(Modifier.fillMaxSize(), Arrangement.Center, Alignment.CenterHorizontally) {
+            Spacer(Modifier.height(8.dp))
             FredTextHeader(stringResource(string.facts))
             FredTextField(animalType,{ animalType = it }, stringResource(string.enterAnimalType))
             Spacer(Modifier.height(4.dp))
             FredTextField(
                 amount,
-                { if(amount.toIntOrNull() != null && amount.toInt() > 0) amount = it },
+                { if(it.toIntOrNull() != null && it.toInt() > 0 || (it == "")) amount = it },
                 stringResource(string.enterAmount)
             )
             Spacer(Modifier.height(16.dp))
-            Row(Modifier.fillMaxWidth(),Arrangement.SpaceAround,Alignment.CenterVertically) {
-                FredIconButton({ controller.navigateUp() },Outlined.ArrowBackIosNew, stringResource(string.goBack))
-                this@Box.ShowInternetInfo ({
-                    animalFactsVM.onEvent(AnimalFactEvent.GetAnimalFacts(animalType,amount.toInt()))
-                }, state.first)
-                FredIconButton({ controller.navigate(ExamScreenRoutes.Favorites.route) }, Outlined.FavoriteBorder,stringResource(string.favourites))
+            LazyRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround, verticalAlignment = Alignment.CenterVertically) {
+                item {
+                    FredIconButton({ controller.navigateUp() },Outlined.ArrowBackIosNew, stringResource(string.goBack))
+                    this@Box.ShowInternetInfo ({
+                        animalFactsVM.onEvent(AnimalFactEvent.GetAnimalFacts(animalType, amount.toIntOrNull() ?: 0))
+                    }, state.first)
+                    FredIconButton({ controller.navigate(ExamScreenRoutes.Favorites.route) }, Outlined.FavoriteBorder,stringResource(string.favourites))
+                }
             }
             Spacer(Modifier.height(16.dp))
             LazyColumn(Modifier.fillMaxSize()) {

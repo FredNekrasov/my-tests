@@ -16,7 +16,7 @@ fun ListItem(
     modifier: Modifier = Modifier
 ) {
     Box(modifier) {
-        FredCardView(Modifier.matchParentSize(),MaterialTheme.colorScheme.tertiary,MaterialTheme.colorScheme.onTertiary)
+        FredCardView(Modifier.matchParentSize(), MaterialTheme.colorScheme.primaryContainer, MaterialTheme.colorScheme.onPrimaryContainer)
         Column(Modifier.fillMaxSize().padding(16.dp)) {
             FredText(fact.text, MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(8.dp))
