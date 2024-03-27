@@ -50,13 +50,13 @@ fun FredTextHeader(value: String, style: TextStyle = MaterialTheme.typography.di
         fontSize = MaterialTheme.typography.displayMedium.fontSize,
         fontFamily = FontFamily.SansSerif,
         style = style,
-        color = MaterialTheme.colorScheme.onTertiaryContainer,
+        color = MaterialTheme.colorScheme.primary,
         overflow = TextOverflow.Ellipsis
     )
 }
 @Composable
 fun FredText(value: String, style: TextStyle = MaterialTheme.typography.bodyMedium) {
-    Text(value, style = style, color = MaterialTheme.colorScheme.onTertiaryContainer, overflow = TextOverflow.Ellipsis)
+    Text(value, style = style, color = MaterialTheme.colorScheme.onPrimaryContainer, overflow = TextOverflow.Ellipsis)
 }
 @Composable
 fun FredTextField(value: String, onChangeNumber: (String) -> Unit, id: String, modifier: Modifier = Modifier) {
@@ -64,14 +64,14 @@ fun FredTextField(value: String, onChangeNumber: (String) -> Unit, id: String, m
         value,
         onChangeNumber,
         modifier,
-        label = { Text(id, fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onTertiaryContainer) },
+        label = { Text(id, fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onPrimaryContainer) },
         shape = MaterialTheme.shapes.medium,
         colors = OutlinedTextFieldDefaults.colors()
     )
 }
 @Composable
 fun FredButton(click: () -> Unit, inf: String, modifier: Modifier = Modifier) {
-    OutlinedButton(click, modifier, colors = ButtonDefaults.outlinedButtonColors()) { Text(inf, fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onTertiaryContainer) }
+    OutlinedButton(click, modifier, colors = ButtonDefaults.outlinedButtonColors()) { Text(inf, fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onPrimaryContainer) }
 }
 @Composable
 fun FredCheckbox(value: Boolean, onCheckedChange: (Boolean) -> Unit) {
@@ -97,7 +97,7 @@ fun CustomOutlinedTF(
     OutlinedTextField(
         value,
         onValueChange,
-        label = { Text(stringResource(labelId), fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onTertiaryContainer) },
+        label = { Text(stringResource(labelId), fontFamily = FontFamily.Serif, color = MaterialTheme.colorScheme.onPrimaryContainer) },
         supportingText = { if(isValueCorrect) Text(stringResource(errorId), color = MaterialTheme.colorScheme.error, fontFamily = FontFamily.Serif) },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         isError = isValueCorrect,
