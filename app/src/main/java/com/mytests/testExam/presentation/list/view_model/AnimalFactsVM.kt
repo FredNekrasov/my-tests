@@ -23,14 +23,14 @@ class AnimalFactsVM(private val useCases: AnimalFactsUseCases) : ViewModel() {
     }
     private fun getData(animalType: String = "", amount: Int = 0) {
         viewModelScope.launch {
-            useCases.getAnimalFacts.getAnimalFacts(animalType,amount).collectLatest {
+            useCases.getAnimalFacts(animalType,amount).flowOn(Dispatchers.IO).collectLatest {
                 resultMSF.emit(it)
             }
         }
     }
     private fun updateData(animalFacts: AnimalFacts) {
         viewModelScope.launch {
-            useCases.updateAnimalFact.updateFact(animalFacts)
+            useCases.updateAnimalFact(animalFacts)
         }
     }
 }
