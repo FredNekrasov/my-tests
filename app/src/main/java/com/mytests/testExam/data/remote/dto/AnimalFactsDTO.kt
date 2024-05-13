@@ -1,6 +1,8 @@
 package com.mytests.testExam.data.remote.dto
 
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class AnimalFactsDTO(
     val text: String,
     val type: String,
