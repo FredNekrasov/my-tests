@@ -3,47 +3,49 @@ package com.mytests.testExam.data.repository
 import com.mytests.testExam.data.local.dao.IAnimalFactsDao
 import com.mytests.testExam.data.mappers.toDomain
 import com.mytests.testExam.data.mappers.toEntity
-import com.mytests.testExam.data.remote.service.IAnimalFactsService
+import com.mytests.testExam.data.remote.dto.AnimalFactsDTO
 import com.mytests.testExam.domain.model.AnimalFacts
 import com.mytests.testExam.domain.repository.IAnimalFactsRepository
 import com.mytests.testExam.domain.util.ConnectionStatus
 import com.mytests.testExam.domain.util.ConnectionStatus.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import retrofit2.HttpException
-import java.io.IOException
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.plugins.*
+import io.ktor.client.request.get
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class AnimalFactsRepository(
     private val dao: IAnimalFactsDao,
-    private val api: IAnimalFactsService
+    private val client : HttpClient
 ) : IAnimalFactsRepository {
     override suspend fun updateEntity(animalFacts : AnimalFacts) = dao.insert(animalFacts.toEntity())
-    override suspend fun getList(
+    override fun getList(
         animalType : String, amount : Int
-    ): StateFlow<Pair<ConnectionStatus, List<AnimalFacts>>> {
+    ): Flow<Pair<ConnectionStatus, List<AnimalFacts>>> = flow {
         val listOfFacts = dao.getAll().map { it.toDomain() }
-        val data = MutableStateFlow(LOADING to listOfFacts)
-        if(animalType.isEmpty() || animalType.isBlank() || amount <= 0) {
-            data.emit(SUCCESS to listOfFacts)
-            return data
-        }
-        try {
-            val result = api.getCatFacts(animalType, amount)
-            if(result == null) data.emit(NO_DATA to listOfFacts)
-            else {
-                result.forEach {
-                    dao.delete(it.toEntity())
-                    dao.insert(it.toEntity())
+        emit(LOADING to listOfFacts)
+        if(animalType.isEmpty() || animalType.isBlank() || amount <= 1) {
+            emit(SUCCESS to listOfFacts)
+        } else {
+            try {
+                val result = client.get("/facts/random?animal_type=$animalType&amount=$amount").body<List<AnimalFactsDTO>?>()
+                if(result.isNullOrEmpty()) {
+                    emit(NO_DATA to listOfFacts)
+                } else {
+                    result.forEach {
+                        dao.delete(it.toEntity())
+                        dao.insert(it.toEntity())
+                    }
+                    emit(SUCCESS to dao.getAll().map { it.toDomain() })
                 }
-                data.emit(SUCCESS to dao.getAll().map { it.toDomain() })
+            } catch (e: RedirectResponseException) {
+                emit(ERROR to listOfFacts)
+            } catch (e: ClientRequestException) {
+                emit(ERROR to listOfFacts)
+            } catch (e: ServerResponseException) {
+                emit(ERROR to listOfFacts)
             }
-        } catch (e: HttpException) {
-            data.emit(ERROR to listOfFacts)
-        } catch (e: IOException) {
-            data.emit(ERROR to listOfFacts)
-        } catch (e: Exception) {
-            data.emit(ERROR to listOfFacts)
         }
-        return data
     }
 }
